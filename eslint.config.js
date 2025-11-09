@@ -6,4 +6,7 @@ export default antfu(
     formatters: true,
     pnpm: true,
   },
+  {
+    ignores: ['**/README.md'],
+  },
 )
