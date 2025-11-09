@@ -37,58 +37,56 @@ async function onFormSubmit() {
 
 <template>
   <div class="login-page">
-    <div class="login-page__container">
-      <div class="login-card">
-        <h1 class="login-card__title">
-          Вход
-        </h1>
+    <div class="login-page__container login-card">
+      <h1 class="login-card__title">
+        Вход
+      </h1>
 
-        <form
-          class="login-form"
-          @submit.prevent="onFormSubmit"
-        >
-          <div class="login-form__field">
-            <label
-              for="username"
-              class="login-form__label"
-            >
-              Логин
-            </label>
-            <BaseInput
-              id="username"
-              v-model="username"
-              type="text"
-              placeholder="Введите логин"
-              :disabled="isLoading"
-            />
-          </div>
-
-          <div class="login-form__field">
-            <label
-              for="password"
-              class="login-form__label"
-            >
-              Пароль
-            </label>
-            <BaseInput
-              id="password"
-              v-model="password"
-              type="password"
-              placeholder="Введите пароль"
-              :disabled="isLoading"
-            />
-          </div>
-
-          <BaseButton
-            theme="primary"
-            type="submit"
-            :disabled="isLoading"
-            class="login-form__submit"
+      <form
+        class="login-form"
+        @submit.prevent="onFormSubmit"
+      >
+        <div class="login-form__field">
+          <label
+            for="username"
+            class="login-form__label"
           >
-            {{ isLoading ? 'Загрузка...' : 'Войти' }}
-          </BaseButton>
-        </form>
-      </div>
+            Логин
+          </label>
+          <BaseInput
+            id="username"
+            v-model="username"
+            type="text"
+            placeholder="Введите логин"
+            :disabled="isLoading"
+          />
+        </div>
+
+        <div class="login-form__field">
+          <label
+            for="password"
+            class="login-form__label"
+          >
+            Пароль
+          </label>
+          <BaseInput
+            id="password"
+            v-model="password"
+            type="password"
+            placeholder="Введите пароль"
+            :disabled="isLoading"
+          />
+        </div>
+
+        <BaseButton
+          theme="primary"
+          type="submit"
+          :disabled="isLoading"
+          class="login-form__submit"
+        >
+          {{ isLoading ? 'Загрузка...' : 'Войти' }}
+        </BaseButton>
+      </form>
     </div>
   </div>
 </template>
@@ -115,7 +113,7 @@ async function onFormSubmit() {
   box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
 
   &__title {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 700;
     text-align: center;
     margin: 0 0 3.2rem;

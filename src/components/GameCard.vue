@@ -45,90 +45,60 @@ function onCardKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div
+  <CardSkeleton
+    v-if="!isVisible"
     ref="cardRef"
-    class="game-card"
+  />
+
+  <div
+    v-else
     tabindex="0"
-    role="button"
-    @click="onPlayClick"
+    class="game-card"
     @keydown="onCardKeydown"
   >
-    <CardSkeleton v-if="!isVisible" />
+    <img
+      v-if="!imageError"
+      :src="game.attributes.image"
+      :alt="game.attributes.title"
+      loading="lazy"
+      class="game-card__image"
+      @error="onImageError"
+    >
+    <div
+      v-else
+      class="game-card__placeholder"
+    >
+      <img
+        src="/placeholder-image.svg"
+        alt="Image placeholder"
+        class="game-card__placeholder-icon"
+      >
+    </div>
 
-    <template v-else>
-      <div class="game-card__image-wrapper">
-        <img
-          v-if="!imageError"
-          :src="game.attributes.image"
-          :alt="game.attributes.title"
-          loading="lazy"
-          class="game-card__image"
-          @error="onImageError"
-        >
-        <div
-          v-else
-          class="game-card__placeholder"
-        >
-          <img
-            src="/placeholder-image.svg"
-            alt="Image placeholder"
-            class="game-card__placeholder-icon"
-          >
-        </div>
-      </div>
+    <div class="game-card__content">
+      <h3 class="game-card__title">
+        {{ game.attributes.title }}
+      </h3>
 
-      <div class="game-card__content">
-        <h3 class="game-card__title">
-          {{ game.attributes.title }}
-        </h3>
-
-        <BaseButton
-          theme="primary"
-          tabindex="-1"
-          class="game-card__button"
-          @click.stop="onPlayClick"
-        >
-          Play
-        </BaseButton>
-      </div>
-    </template>
+      <BaseButton
+        theme="primary"
+        tabindex="-1"
+        class="game-card__button"
+        @click.stop="onPlayClick"
+      >
+        Play
+      </BaseButton>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 .game-card {
-  background: $color-white;
-  border-radius: 1.2rem;
+  width: 100%;
+  padding-top: 66.67%;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.07);
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  outline: none;
-
-  &:hover,
-  &:focus {
-    transform: translateY(-0.4rem);
-    box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.15);
-  }
-
-  &:focus-visible {
-    outline: 0.2rem solid $color-primary;
-    outline-offset: 0.2rem;
-  }
-
-  &:active {
-    transform: translateY(-0.2rem);
-  }
-
-  &__image-wrapper {
-    width: 100%;
-    padding-top: 66.67%;
-    position: relative;
-    overflow: hidden;
-    background: $color-background;
-  }
+  background: $color-background;
 
   &__image {
     position: absolute;
@@ -171,6 +141,7 @@ function onCardKeydown(event: KeyboardEvent) {
     color: $color-black;
     margin: 0 0 1.6rem;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     display: -webkit-box;
     line-clamp: 2;

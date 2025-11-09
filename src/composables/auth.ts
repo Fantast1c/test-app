@@ -1,5 +1,6 @@
 import { fetchBalance, fetchLogin, fetchRefreshToken } from '~/api/authApi'
 import { BALANCE_UPDATE_INTERVAL, DEFAULT_CURRENCY, TOKEN_REFRESH_INTERVAL } from '~/api/config'
+import { useToastError } from '~/composables/toastError'
 import { UnauthorizedError } from '~/utils/handleApiError'
 
 interface AuthState {
@@ -25,6 +26,7 @@ let balanceUpdateTimer: ReturnType<typeof setInterval> | null = null
 
 export function useAuthStore() {
   const router = useRouter()
+  const { showError } = useToastError()
 
   async function login(username: string, password: string) {
     try {
@@ -42,7 +44,6 @@ export function useAuthStore() {
 
       startTokenRefresh()
       startBalanceUpdate()
-      await updateBalance()
     }
     catch (error) {
       console.error('Login error:', error)
@@ -82,6 +83,7 @@ export function useAuthStore() {
       }
       catch (error) {
         if (error instanceof UnauthorizedError) {
+          showError('Пользователь не авторизован')
           logout()
           return
         }
@@ -135,6 +137,7 @@ export function useAuthStore() {
     }
     catch (error) {
       if (error instanceof UnauthorizedError) {
+        showError('Пользователь не авторизован')
         logout()
         return
       }

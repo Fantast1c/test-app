@@ -3,9 +3,12 @@ import type { Game } from '~/types/api'
 
 interface Props {
   game: Game
+  loading?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  loading: false,
+})
 
 const emit = defineEmits<{
   play: [gameId: string]
@@ -37,6 +40,10 @@ function onImageError() {
 }
 
 function onCardKeydown(event: KeyboardEvent) {
+  if (props.loading) {
+    return
+  }
+
   if (event.key === 'Enter') {
     event.preventDefault()
     onPlayClick()
@@ -45,17 +52,18 @@ function onCardKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <div
-    ref="cardRef"
-    class="game-card"
-    tabindex="0"
-    role="button"
-    @click="onPlayClick"
-    @keydown="onCardKeydown"
-  >
-    <GameCardSkeleton v-if="!isVisible" />
+  <div ref="cardRef">
+    <GameCardSkeleton
+      v-if="!isVisible"
+    />
 
-    <template v-else>
+    <div
+      v-else
+      role="button"
+      tabindex="0"
+      class="game-card"
+      @keydown="onCardKeydown"
+    >
       <div class="game-card__image-wrapper">
         <img
           v-if="!imageError"
@@ -85,13 +93,14 @@ function onCardKeydown(event: KeyboardEvent) {
         <BaseButton
           theme="primary"
           tabindex="-1"
+          :disabled="props.loading"
           class="game-card__button"
           @click.stop="onPlayClick"
         >
-          Play
+          {{ props.loading ? 'Загрузка...' : 'Play' }}
         </BaseButton>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -104,7 +113,6 @@ function onCardKeydown(event: KeyboardEvent) {
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   outline: none;
 
   &:hover,

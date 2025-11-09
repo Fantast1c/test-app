@@ -84,7 +84,7 @@ const props = defineProps<Props>()
   }
 
   &__value {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 700;
   }
 }

@@ -30,6 +30,7 @@ const formattedBalance = computed(() => {
 
 const games = ref<Game[]>([])
 const isLoadingGames = ref(false)
+const loadingGameId = ref<string | null>(null)
 
 async function loadGames() {
   isLoadingGames.value = true
@@ -58,6 +59,8 @@ async function onGamePlay(gameId: string) {
     return
   }
 
+  loadingGameId.value = gameId
+
   try {
     const response = await fetchGameSession(gameId, state.token, DEFAULT_CURRENCY)
     const gameUrl = response.data[0].attributes['launch-options']['game-url']
@@ -78,6 +81,9 @@ async function onGamePlay(gameId: string) {
 
     console.error('Failed to start game:', err)
     showError('Не удалось запустить игру')
+  }
+  finally {
+    loadingGameId.value = null
   }
 }
 
@@ -118,6 +124,7 @@ onMounted(async () => {
       <GameList
         :games="games"
         :loading="isLoadingGames"
+        :loading-game-id="loadingGameId"
         @play="onGamePlay"
       />
     </MainWrapper>
