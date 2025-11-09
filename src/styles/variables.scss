@@ -1,0 +1,27 @@
+// Breakpoints
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// Colors
+$color-white: #ffffff;
+$color-black: #1a202c;
+$color-gray-dark: #2d3748;
+$color-gray: #718096;
+$color-gray-light: #a0aec0;
+$color-gray-lighter: #cbd5e0;
+$color-gray-lightest: #e2e8f0;
+$color-background: #f7fafc;
+$color-background-light: #f1f1f1;
+$color-primary: #667eea;
+$color-primary-dark: #764ba2;
+
+// Colors - Error
+$color-error: #ec4899;
+$color-error-dark: #be185d;
+$color-error-darker: #831843;
+$color-error-light: #fff5f7;
+$color-danger: #e53e3e;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+$gradient-error: linear-gradient(135deg, $color-error 0%, $color-error-dark 100%);

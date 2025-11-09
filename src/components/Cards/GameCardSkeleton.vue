@@ -1,0 +1,24 @@
+<template>
+  <div class="game-card-skeleton" />
+</template>
+
+<style scoped lang="scss">
+.game-card-skeleton {
+  width: 100%;
+  min-height: 35rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  border-radius: 1.2rem;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+</style>
