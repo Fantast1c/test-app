@@ -16,4 +16,3 @@ export function checkResponseStatus(response: Response) {
     throw new Error(`Request failed with status ${response.status}`)
   }
 }
-

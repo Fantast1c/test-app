@@ -11,7 +11,7 @@ declare module 'vue' {
     AppSidebar: typeof import('./src/components/AppSidebar.vue')['default']
     BaseButton: typeof import('./src/components/BaseButton.vue')['default']
     BaseInput: typeof import('./src/components/BaseInput.vue')['default']
-    GameCard: typeof import('./src/components/GameCard.vue')['default']
+    GameCard: typeof import('./src/components/Cards/GameCard.vue')['default']
     GameCardSkeleton: typeof import('./src/components/Cards/GameCardSkeleton.vue')['default']
     GameList: typeof import('./src/components/GameList.vue')['default']
     MainWrapper: typeof import('./src/components/MainWrapper.vue')['default']
