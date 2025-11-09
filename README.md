@@ -1,2 +1,8 @@
-pnpm i
-pnpm dev
+# Запуск проекта
+
+- pnpm i
+
+- pnpm dev
+
+
+
